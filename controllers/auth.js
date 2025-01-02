@@ -40,7 +40,7 @@ async function login (req,res){
     const {email, password }  = req.body;
  
     if(!email) res.status(400).send({msg:"El email es obligatorio"});
-    if(!password) res.status(400).send({msg:"El password es obligatorio"});
+    if(!password) res.status(400).send({msg:"La contraseña es obligatorio"});
  
     const emailLowerCase = email.toLowerCase();
  
@@ -48,15 +48,15 @@ async function login (req,res){
         const response = await User.findOne({ email: emailLowerCase })
         bcrypt.compare(password, response.password, (bcryptError, check) => {
             if(bcryptError){
-                res.status(500).send({msg:"Error del servidor"});
+                res.status(500).send({msg:"Usuario o contraseña incorrecta"});
             }else if (!check){
-                res.status(400).send({msg:"Contraseña incorrecta"});
+                res.status(400).send({msg:"Usuario o contraseña incorrecta"});
             }else if(!response.active){
                 res.status(400).send({msg:"Usuario no autorizado o no activo"});
             }else{
                 res.status(200).send({
                     access : jwt.createAccessToken(response),
-                    refres :jwt.createRefreshToken(response)
+                    refresh :jwt.createRefreshToken(response)
                 });
             }
         })

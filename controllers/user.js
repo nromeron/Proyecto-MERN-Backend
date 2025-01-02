@@ -79,11 +79,14 @@ async function updateUser(req,res){
     try {
         const response = await User.findByIdAndUpdate({ _id: id }, userData);
         if(response.avatar){
-            fs.unlinkSync(`./uploads/${response.avatar}`)
+            if(fs.existsSync (`./uploads/${response.avatar}`)){
+                fs.unlinkSync (`./uploads/${response.avatar}`)
+            }
         }
         res.status(200).send({ msg: "Actualizacion correcta" });
     } catch (error) {
-        res.status(400).send({ msg: "Error al actualizar el usuario" });
+        console.log(error);
+        res.status(400).send({ msg: "Error al actualizar" });
     }
  
 }
@@ -92,8 +95,8 @@ async function deleteUser(req,res){
     const { id } = req.params;
     try {
         const response = await User.findByIdAndDelete(id)
-        if(response.avatar){
-            fs.unlinkSync(`./uploads/${response.avatar}`)
+        if(fs.existsSync (`./uploads/${response.avatar}`)){
+            fs.unlinkSync (`./uploads/${response.avatar}`)
         }
         res.status(200).send({ msg: "Usuario eliminado" });
     } catch (error) {
