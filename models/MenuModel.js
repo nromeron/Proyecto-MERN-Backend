@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 //atributes of the User
 const MenuSchema = mongoose.Schema({
-    tittle: String,
+    title: String,
+    description: String,
     path: String,
     order: Number,
     active: Boolean
