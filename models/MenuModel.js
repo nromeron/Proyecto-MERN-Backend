@@ -7,6 +7,7 @@ const MenuSchema = mongoose.Schema({
     path: String,
     order: Number,
     active: Boolean
+    
 });
  
 module.exports = mongoose.model("Menu", MenuSchema);

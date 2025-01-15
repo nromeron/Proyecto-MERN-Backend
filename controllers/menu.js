@@ -2,6 +2,7 @@ const Menu = require("../models/MenuModel");
 
 async function createMenu(req, res) {
     const menu = new Menu(req.body);
+    //console.log(menu)
 
     try {
         await menu.save();
