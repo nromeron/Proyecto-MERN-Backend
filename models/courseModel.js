@@ -3,7 +3,7 @@ const mongoosePaginate = require("mongoose-paginate-v2")
 
 //atributes of the course
 const courseSchema = mongoose.Schema({
-    tittle: String,
+    title: String,
     miniature: String,
     description: String,
     url: String,

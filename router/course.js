@@ -7,10 +7,10 @@ const mdUpload = multiParty({ uploadDir: "./uploads/course"});
 const api = express.Router();
 
 
-api.post("/course/createCourse", [mdAuth.asureAuth, mdUpload] , courseController.createCurse);
-api.get("/course/getAll", courseController.getAllcourses);
-api.patch("/course/:id",[mdAuth.asureAuth, mdUpload], courseController.updateCourse);
-api.delete("/course/:id",[mdAuth.asureAuth], courseController.deleteCourse);
+api.post("/course/create", [mdAuth.asureAuth, mdUpload] , courseController.createCurse);
+api.get("/course/all", courseController.getAllcourses);
+api.patch("/course/update/:id",[mdAuth.asureAuth, mdUpload], courseController.updateCourse);
+api.delete("/course/delete/:id",[mdAuth.asureAuth], courseController.deleteCourse);
 
 
 
